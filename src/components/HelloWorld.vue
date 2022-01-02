@@ -1,58 +1,104 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+  <div class="container mx-auto">
+    <Header :msg="msg"/>
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 ">
+      <CardView class="m-5"
+                v-for="(site, i) in webSites" :key="i"
+                :index="site.index"
+                :fas="site.fas"
+                :title="site.title"
+                :desc="site.desc"
+                :link="site.link"/>
+    </div>
+    <Footer author="Holger Zhang" ipc="黑ICP备20001742号" :year="2022"/>
   </div>
 </template>
 
 <script>
+import CardView from "@/components/CardView";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+
 export default {
   name: 'HelloWorld',
+  components: {Footer, Header, CardView},
   props: {
     msg: String
+  },
+  data: () => {
+    return {
+      webSites: [{
+        index: '01',
+        fas: 'fa-book',
+        title: 'Holger 小站',
+        desc: '整理知识，记录成长。',
+        link: 'https://blog.holgerbest.top/'
+      }, {
+        index: '02',
+        fas: 'fa-file-download',
+        title: '下载站 Get',
+        desc: '小文件共享下载站。公共用户请关注公众号“Holger Learning”获取！',
+        link: 'https://get.holgerbest.top/'
+      }, {
+        index: '03',
+        fas: 'fa-atlas',
+        title: '导航 StartUP',
+        desc: '仿 夸克浏览器 的轻量级导航。',
+        link: 'https://startup.holgerbest.top/'
+      }, {
+        index: '04',
+        fas: 'fa-book',
+        title: 'API',
+        desc: '实验性 API 分发站点。',
+        link: 'https://api.holgerbest.top/'
+      }, {
+        index: '05',
+        fas: 'fa-music',
+        title: '在线音乐播放器',
+        desc: '轻量级可嵌入的 JS 音乐播放器（需将 mp3 链接传入 URL 参数 music）',
+        link: 'https://play.holgerbest.top/?music=example'
+      }, {
+        index: '06',
+        fas: 'fa-warehouse',
+        title: '私有存储仓库 Repo',
+        desc: '私有存储仓库，现用于全站图片、PDF存储。',
+        link: 'https://repo.holgerbest.top/'
+      }]
+    }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
+<style>
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #161623 !important;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(#f00, #f0f);
+  clip-path: circle(10% at right 70%);
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+
+body::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(#2196f3, #e91e63);
+  clip-path: circle(20% at 10% 10%);
 }
 </style>
