@@ -1,16 +1,22 @@
 <template>
-  <div class="container mx-auto">
-    <Header :msg="msg"/>
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 ">
-      <CardView class="m-5"
-                v-for="(site, i) in webSites" :key="i"
-                :index="site.index"
-                :fas="site.fas"
-                :title="site.title"
-                :desc="site.desc"
-                :link="site.link"/>
+  <div class="page-bg">
+    <div class="container mx-auto flex flex-col min-h-screen">
+      <Header :msg="msg"/>
+      <div class="flex-1 flex flex-col justify-center">
+        <div class="grid grid-cols-1 lg:grid-cols-3 ">
+          <CardView class="m-5"
+                    v-for="(site, i) in webSites" :key="i"
+                    :index="site.index"
+                    :fas="site.fas"
+                    :title="site.title"
+                    :desc="site.desc"
+                    :link="site.link"/>
+        </div>
+      </div>
+      <div class="mt-auto">
+        <Footer author="HOLGER ZHANG" ipc="黑ICP备20001742号" :year="currentYear"/>
+      </div>
     </div>
-    <Footer author="Holger Zhang" ipc="黑ICP备20001742号" :year="2022"/>
   </div>
 </template>
 
@@ -25,44 +31,31 @@ export default {
   props: {
     msg: String
   },
+  computed: {
+    currentYear() {
+      return new Date().getFullYear()
+    }
+  },
   data: () => {
     return {
       webSites: [{
         index: '01',
         fas: 'fa-book',
-        title: 'Holger 小站',
-        desc: '整理知识，记录成长。',
-        link: 'https://blog.holgerbest.top/'
+        title: "Holger's Blog",
+        desc: '心有所向 日复一日 必有精进',
+        link: 'https://blog.holger.host'
       }, {
         index: '02',
-        fas: 'fa-file-download',
-        title: '下载站 Get',
-        desc: '小文件共享下载站。公共用户请关注公众号“Holger Learning”获取！',
-        link: 'https://get.holgerbest.top/'
+        fas: 'fa-robot',
+        title: 'About Me',
+        desc: '关于我',
+        link: 'https://me.holger.host'
       }, {
         index: '03',
-        fas: 'fa-atlas',
-        title: '导航 StartUP',
-        desc: '仿 夸克浏览器 的轻量级导航。',
-        link: 'https://startup.holgerbest.top/'
-      }, {
-        index: '04',
-        fas: 'fa-book',
-        title: 'API',
-        desc: '实验性 API 分发站点。',
-        link: 'https://api.holgerbest.top/'
-      }, {
-        index: '05',
-        fas: 'fa-music',
-        title: '在线音乐播放器',
-        desc: '轻量级可嵌入的 JS 音乐播放器（需将 mp3 链接传入 URL 参数 music）',
-        link: 'https://play.holgerbest.top/?music=example'
-      }, {
-        index: '06',
-        fas: 'fa-warehouse',
-        title: '私有存储仓库 Repo',
-        desc: '私有存储仓库，现用于全站图片、PDF存储。',
-        link: 'https://repo.holgerbest.top/'
+        fas: 'fa-camera',
+        title: 'Travel',
+        desc: '旅行日志',
+        link: 'https://travel.holger.host'
       }]
     }
   }
@@ -72,33 +65,38 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 
+@keyframes gradient-shift {
+  0% { background-position: 0% 0%; }
+  25% { background-position: 100% 15%; }
+  50% { background-position: 90% 90%; }
+  75% { background-position: 10% 85%; }
+  100% { background-position: 0% 0%; }
+}
+
 body {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: #161623 !important;
+  margin: 0;
 }
 
-body::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
+.page-bg {
+  min-height: 100vh;
   width: 100%;
-  height: 100%;
-  background: linear-gradient(#f00, #f0f);
-  clip-path: circle(10% at right 70%);
-}
-
-body::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(#2196f3, #e91e63);
-  clip-path: circle(20% at 10% 10%);
+  min-width: 100vw;
+  box-sizing: border-box;
+  /* 浅色动态渐变，不均匀色标 + 非线性动画 */
+  background: linear-gradient(
+    135deg,
+    #fef9f3 0%,
+    #d4e9f7 12%,
+    #e8dcef 35%,
+    #d4f0e0 62%,
+    #f5eef6 85%,
+    #fef9f3 100%
+  );
+  background-size: 320% 320%;
+  animation: gradient-shift 10s cubic-bezier(0.45, 0, 0.55, 1) infinite;
 }
 </style>

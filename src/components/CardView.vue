@@ -56,15 +56,15 @@ export default {
   height: 350px;
   margin: 30px;
   box-shadow: 20px 20px 50px rgba(0, 0, 0, .5);
-  border-radius: 15px;
-  background: rgba(255, 255, 255, .1);
+  border-radius: 30px;
+  background: rgba(255, 255, 255, .25);
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-top: 1px solid rgba(255, 255, 255, .5);
-  border-left: 1px solid rgba(255, 255, 255, .5);
-  /*backdrop-filter: blur(10px);*/
+  border-top: 1px solid rgba(255, 255, 255, .6);
+  border-left: 1px solid rgba(255, 255, 255, .6);
+  backdrop-filter: blur(10px);
 }
 
 .my-container .card .content {
@@ -83,19 +83,21 @@ export default {
   top: -80px;
   right: 30px;
   font-size: 8em;
-  color: rgba(255, 255, 255, .05);
+  font-weight: 900;
+  color: rgba(0, 0, 0, .06);
   pointer-events: none;
 }
 
 .my-container .card .content h3 {
   font-size: 1.8em;
-  color: white;
+  color: #222;
+  font-weight: 600;
   z-index: 1;
 }
 
 .my-container .card .content p {
   font-size: 1em;
-  color: white;
+  color: #444;
   font-weight: 300;
 }
 
